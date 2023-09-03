@@ -8,15 +8,14 @@ import {
 import TodoManagerHeader from "./TodoManagerHeader";
 import "./TodoManager.css";
 import MemoTodoListItem from "./TodoListItem";
+import { getTotalTodosSelector } from "../../selectors/todoSelector";
 
 function TodoManager() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const localTodoCounter = useRef(1);
   const [newTodo, setNewTodo] = useState("");
-
-  const todoList = useSelector((state) => state.todo.saved.data);
-  const localList = useSelector((state) => state.todo.local);
+  const { savedTodos, localTodos } = useSelector(getTotalTodosSelector);
 
   useEffect(() => {
     dispatch(getAllTodos());
@@ -54,10 +53,10 @@ function TodoManager() {
         </button>
       </div>
       <ul className="todo-list">
-        {localList.map((todo) => (
+        {localTodos.map((todo) => (
           <MemoTodoListItem todo={todo} key={todo.id} />
         ))}
-        {todoList.map((todo, index) => (
+        {savedTodos.map((todo, index) => (
           <li key={index}>{todo.task}</li>
         ))}
       </ul>

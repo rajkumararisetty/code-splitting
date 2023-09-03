@@ -1,19 +1,19 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import { lazyLoadRoutes } from "./LazyLoadRoutes";
+import { LazyLoadRoutes } from "./LazyLoadRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: lazyLoadRoutes('Home'),
+    element: <LazyLoadRoutes componentName="Home"/>,
   },
   {
     path: "/todoManager",
-    element: lazyLoadRoutes('TodoManager'),
+    element: <LazyLoadRoutes componentName="TodoManager" reducers={['todo']} sagas={['todo']} />,
   },
   {
     path: "/contactsManager",
-    element: lazyLoadRoutes('ContactsManager'),
+    element: <LazyLoadRoutes componentName="ContactsManager" reducers={['contact']} sagas={['contact']} />,
   },
 ]);
 
